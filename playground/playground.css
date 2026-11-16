@@ -1,0 +1,185 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    padding: 1rem;
+    background: #080d18;
+    color: #e8f1ff;
+    font: 16px 'Rajdhani', Arial, sans-serif
+}
+
+.topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .7rem;
+    flex-wrap: wrap;
+    margin-bottom: .8rem
+}
+
+.topline h1 {
+    margin: 0;
+    font: 600 1rem 'Orbitron', sans-serif;
+    color: #dfff00
+}
+
+.actions {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap
+}
+
+.actions button,
+.tab {
+    padding: .55rem .9rem;
+    border: 1px solid #24556a;
+    border-radius: 9px;
+    background: #112238;
+    color: #e8f1ff;
+    cursor: pointer
+}
+
+.actions button.primary {
+    background: #006c7d;
+    border-color: #00e5ff
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: .8rem;
+    min-height: 560px
+}
+
+.panel {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(0, 229, 255, .25);
+    border-radius: 13px;
+    background: #101827
+}
+
+.panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: .65rem .8rem;
+    background: #142238;
+    border-bottom: 1px solid #233a52;
+    color: #dfff00;
+    font: 500 .78rem 'JetBrains Mono', monospace
+}
+
+.tabs {
+    display: flex;
+    gap: .35rem
+}
+
+.tab.active {
+    border-color: #dfff00;
+    color: #dfff00
+}
+
+.editor-wrap {
+    flex: 1;
+    min-height: 450px
+}
+
+.CodeMirror {
+    height: 100%;
+    min-height: 450px;
+    font: 13px/1.55 'JetBrains Mono', monospace
+}
+
+/* RESIZABLE MINI-BROWSER */
+
+.preview-wrap {
+    padding: .6rem;
+    flex: 0 1 auto;
+    min-height: 250px;
+    background: #0b1220;
+
+    resize: both;
+    overflow: auto;
+
+    width: 100%;
+    height: 450px;
+
+    min-width: 200px;
+    min-height: 250px;
+
+    max-width: 100%;
+
+    align-self: flex-start
+}
+
+.preview-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border: 0;
+    border-radius: 8px;
+    background: white
+}
+
+.status {
+    min-height: 1.4rem;
+    padding: .35rem .8rem;
+    color: #9fb0c6;
+    font-size: .85rem
+}
+
+.solution {
+    display: none;
+    white-space: pre;
+    overflow: auto;
+    margin: 0;
+    padding: 1rem;
+    color: #d8e8fa;
+    font: 12px/1.6 'JetBrains Mono', monospace;
+    min-height: 450px
+}
+
+@media(max-width:760px) {
+    .workspace {
+        grid-template-columns: 1fr
+    }
+
+    .editor-wrap,
+    .CodeMirror {
+        min-height: 390px
+    }
+
+    .preview-wrap {
+        min-height: 250px;
+        height: 420px
+    }
+
+    .preview-wrap iframe {
+        min-height: 0
+    }
+}
+
+@media(max-width:420px) {
+    body {
+        padding: .5rem
+    }
+
+    .topline {
+        align-items: flex-start
+    }
+
+    .actions button {
+        font-size: .85rem
+    }
+
+    .panel-head {
+        flex-wrap: wrap
+    }
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive classroom guide to CSS responsive web design.">
+  <title>Responsive Web Design // GROUP 2</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="site.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">RWD<span style="color:var(--cyan)">CSS</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">☰ Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="viewport.html">Viewport</a><a href="gridview.html">Grid View</a>
+        <a href="mediaqueries.html">Media Queries</a><a href="images.html">Responsive Images</a>
+        <a href="videos.html">Responsive Videos</a><a href="frameworks.html">Frameworks</a>
+        <a href="templates.html">Templates</a>
+        <div class="dropdown">
+          <button class="drop-button" type="button" aria-expanded="false">More ▾</button>
+          <div class="dropdown-menu">
+            <a href="references.html">References</a><a href="activity.html">Activity</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero container">
+      <div class="eyebrow">Interactive learning module // GROUP 2</div>
+      <h1>CSS RESPONSIVE<br>WEB DESIGN</h1>
+      <p class="lead">One website. Every screen. Explore the techniques that help web pages adapt to desktops, tablets,
+        and phones.</p>
+      <a class="button" href="#lessons">Explore the lessons ↓</a>
+    </section>
+    <section class="container section">
+      <div class="content-panel">
+        <h2>Best experience for all users</h2>
+        <p>People access websites using many different devices, screen sizes, orientations, and input methods.
+          Responsive web design helps content remain readable, usable, and visually consistent wherever it is viewed.
+        </p>
+        <p>This module introduces the viewport, fluid grids, media queries, responsive images and videos, CSS
+          frameworks, and responsive templates. Each lesson includes an editable code playground.</p>
+      </div>
+    </section>
+    <section class="container section" id="lessons">
+      <div class="section-heading">
+        <div class="eyebrow">Learning path</div>
+        <h2>Explore the modules</h2>
+        <p>Each tile is a snippet of the lessons we are covering, try it for yourself!</p>
+      </div>
+      <div class="topic-grid">
+        <article class="topic-card">
+          <span class="eyebrow">Viewport basics</span>
+          <h3>The Viewport</h3>
+          <p>The viewport is the browser's visible area. Learn how the viewport meta tag helps a page use the real
+            device width and scale correctly.</p>
+          <iframe class="preview-frame" src="viewport-example.html" title="The Viewport interactive preview"
+            loading="lazy"></iframe>
+          <div class="card-actions"><a class="button" href="viewport.html">Open lesson</a><a class="button"
+              href="viewport-example.html">Open demo</a></div>
+        </article>
+        <article class="topic-card">
+          <span class="eyebrow">Flexible grid</span>
+          <h3>Grid View</h3>
+          <p>A fluid grid uses flexible columns and gaps so content can rearrange instead of forcing a fixed-width
+            layout.</p>
+          <iframe class="preview-frame" src="grid-example.html" title="Grid View interactive preview"
+            loading="lazy"></iframe>
+          <div class="card-actions"><a class="button" href="gridview.html">Open lesson</a><a class="button"
+              href="grid-example.html">Open demo</a></div>
+        </article>
+        <article class="topic-card">
+          <span class="eyebrow">Responsive breakpoints</span>
+          <h3>Media Queries</h3>
+          <p>Media queries apply CSS only when a condition is true, such as a viewport width, orientation, or user
+            preference.</p>
+          <iframe class="preview-frame" src="media-example.html" title="Media Queries interactive preview"
+            loading="lazy"></iframe>
+          <div class="card-actions"><a class="button" href="media.html">Open lesson</a><a class="button"
+              href="media-example.html">Open demo</a></div>
+        </article>
+        <article class="topic-card">
+          <span class="eyebrow">Image fitting</span>
+          <h3>Responsive Images</h3>
+          <p>Responsive images scale within their containers. The picture and srcset tools can also select a suitable
+            image source.</p>
+          <iframe class="preview-frame" src="image-example.html" title="Responsive Images interactive preview"
+            loading="lazy"></iframe>
+          <div class="card-actions"><a class="button" href="images.html">Open lesson</a><a class="button"
+              href="image-example.html">Open demo</a></div>
+        </article>
+        <article class="topic-card">
+          <span class="eyebrow">Video controls</span>
+          <h3>Responsive Videos</h3>
+          <p>Responsive video keeps its aspect ratio and fits the available width without overflowing its container.</p>
+          <iframe class="preview-frame" src="video-example.html" title="Responsive Videos interactive preview"
+            loading="lazy"></iframe>
+          <div class="card-actions"><a class="button" href="videos.html">Open lesson</a><a class="button"
+              href="video-example.html">Open demo</a></div>
+        </article>
+        <article class="topic-card">
+          <span class="eyebrow">Framework preview</span>
+          <h3>CSS Frameworks</h3>
+          <p>Frameworks provide reusable layout and component styles. Compare common options and a small responsive
+            Bootstrap example.</p>
+          <iframe class="preview-frame" src="framework-example.html" title="CSS Frameworks interactive preview"
+            loading="lazy"></iframe>
+          <div class="card-actions"><a class="button" href="frameworks.html">Open lesson</a><a class="button"
+              href="framework-example.html">Open demo</a></div>
+        </article>
+        <article class="topic-card">
+          <span class="eyebrow">Template gallery</span>
+          <h3>Responsive Templates</h3>
+          <p>A responsive template is a reusable page structure that adapts to different screens and content types.</p>
+          <iframe class="preview-frame" src="template-example.html" title="Responsive Templates interactive preview"
+            loading="lazy"></iframe>
+          <div class="card-actions"><a class="button" href="templates.html">Open lesson</a><a class="button"
+              href="template-example.html">Open demo</a></div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><strong>RESPONSIVE WEB DESIGN // GROUP 2</strong><br>One web. Every screen. Built to
+    adapt.
+  </footer>
+  <script src="page-transition.js"></script>
+</body>
+
+</html>

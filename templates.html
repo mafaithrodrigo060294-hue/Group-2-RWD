@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="A responsive template is a reusable page structure that adapts to different screens and content types.">
+  <title>Responsive Templates | RWD GROUP 2</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="site.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">RWD<span style="color:var(--cyan)">CSS</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">☰ Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="viewport.html">Viewport</a><a href="gridview.html">Grid View</a>
+        <a href="mediaqueries.html">Media Queries</a><a href="images.html">Responsive Images</a>
+        <a href="videos.html">Responsive Videos</a><a href="frameworks.html">Frameworks</a>
+        <a href="templates.html">Templates</a>
+        <div class="dropdown">
+          <button class="drop-button" type="button" aria-expanded="false">More ▾</button>
+          <div class="dropdown-menu">
+            <a href="references.html">References</a><a href="activity.html">Activity</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">Lesson // Template gallery</div>
+      <h1>Responsive Templates</h1>
+      <p class="lead">A responsive template is a reusable page structure that adapts to different screens and content
+        types.</p>
+    </section>
+    <section class="content-panel">
+      <h2>What is a responsive template?</h2>
+      <p>A responsive template is a reusable page structure designed to adjust to different screen sizes. Templates help
+        developers start with a consistent layout instead of building every page from scratch.</p>
+      <h3>Common template types</h3>
+      <ul>
+        <li><strong>Portfolio:</strong> showcases projects, skills, and contact information.</li>
+        <li><strong>Business:</strong> presents services, company information, and calls to action.</li>
+        <li><strong>Blog:</strong> organizes articles, categories, and author information.</li>
+        <li><strong>Landing page:</strong> focuses attention on one product, service, or action.</li>
+        <li><strong>Dashboard:</strong> arranges data panels, navigation, and tools.</li>
+      </ul>
+      <h3>What makes a template responsive?</h3>
+      <ul>
+        <li>Flexible grid or flexbox layout.</li>
+        <li>Navigation that adapts to narrow screens.</li>
+        <li>Images and videos that fit their containers.</li>
+        <li>Readable typography and comfortable touch targets.</li>
+        <li>Media queries where content needs a different arrangement.</li>
+      </ul>
+      <div class="callout">A template is a starting point, not a substitute for testing. Replace sample content, check
+        accessibility, and test the layout on real screen sizes.</div>
+    </section>
+    <section class="content-panel">
+      <div class="eyebrow">Hands-on lab</div>
+      <h2>Interactive code playground</h2>
+      <p>Edit the starter code, run it, and compare your output. Use the solution tab when you want to check your work.
+      </p><iframe class="playground-frame" src="playground/playground.html?lesson=templates"
+        title="Responsive Templates code playground" loading="lazy"></iframe>
+    </section>
+    <section class="card-actions"><a class="button" href="template-example.html">Try the interactive demo</a><a
+        class="button" href="index.html#lessons">Back to lessons</a></section>
+  </main>
+  <footer class="site-footer"><strong>RESPONSIVE WEB DESIGN // GROUP 2</strong><br>One web. Every screen. Built to
+    adapt.
+  </footer>
+  <script src="page-transition.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Responsive Template Gallery</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 2rem;
+            font: 15px Arial, sans-serif;
+            color: #E8F1FF;
+            background: #080B14;
+            overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -50%;
+            z-index: -2;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 20% 30%, #00E5FF30, transparent 25%),
+                radial-gradient(circle at 80% 20%, #FF149328, transparent 25%),
+                radial-gradient(circle at 60% 80%, #DFFF0020, transparent 25%);
+            animation: backgroundMove 14s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                linear-gradient(#00E5FF12 1px, transparent 1px),
+                linear-gradient(90deg, #00E5FF12 1px, transparent 1px);
+            background-size: 45px 45px;
+            mask-image: linear-gradient(to bottom, black, transparent 95%);
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                transform: translate(-3%, -2%) rotate(0deg) scale(1);
+            }
+
+            100% {
+                transform: translate(3%, 2%) rotate(8deg) scale(1.1);
+            }
+        }
+
+        /* MAIN RESIZABLE WINDOW */
+
+        .resize-window {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1000px;
+            height: 720px;
+            min-width: 280px;
+            min-height: 380px;
+            margin: auto;
+            padding: 1.3rem;
+            border: 1px solid #00E5FF88;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #151B2BEE, #101625F2);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow:
+                0 0 25px #00E5FF25,
+                0 0 60px #FF149315,
+                inset 0 1px 1px #ffffff20;
+            overflow: hidden;
+        }
+
+        .heading {
+            margin-bottom: 1rem;
+            flex: 0 0 auto;
+        }
+
+        .heading span {
+            color: #DFFF00;
+            font-size: .7rem;
+            letter-spacing: 3px;
+        }
+
+        .heading h1 {
+            margin: .5rem 0;
+            color: #00E5FF;
+            font-size: 1.6rem;
+            text-shadow: 0 0 12px #00E5FF55;
+        }
+
+        .heading p {
+            color: #AAB6CA;
+            line-height: 1.6;
+        }
+
+        /* TEMPLATE BUTTONS */
+
+        .buttons {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+            flex: 0 0 auto;
+        }
+
+        .buttons button {
+            padding: .7rem 1.1rem;
+            border: 1px solid #00E5FF88;
+            border-radius: 9px;
+            background: #111D30;
+            color: #E8F1FF;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .buttons button:hover {
+            border-color: #FF1493;
+            color: #FF1493;
+            box-shadow: 0 0 12px #FF149344;
+        }
+
+        .buttons button.active {
+            background: #00E5FF;
+            color: #080B14;
+            border-color: #00E5FF;
+            box-shadow: 0 0 18px #00E5FF66;
+        }
+
+        .buttons button:focus-visible {
+            outline: 2px solid #DFFF00;
+            outline-offset: 3px;
+        }
+
+        /* PREVIEW AREA */
+
+        .preview-window {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            border: 1px solid #00E5FF55;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .preview {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background: white;
+        }
+
+        /* OPEN TEMPLATE LINK */
+
+        .preview-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 10px 3px 0;
+            flex: 0 0 auto;
+        }
+
+        .preview-footer p {
+            margin: 0;
+            color: #AAB6CA;
+            font-size: 11px;
+        }
+
+        .preview-footer a {
+            color: #00E5FF;
+            font-size: 11px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .preview-footer a:hover {
+            color: #FF1493;
+        }
+
+        /* RESIZE HANDLE */
+
+        .resize-handle {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FF1493;
+            border-radius: 12px 0 17px 0;
+            box-shadow: 0 0 15px #FF149388;
+            cursor: nwse-resize;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            z-index: 10;
+        }
+
+        .resize-handle span {
+            width: 13px;
+            height: 13px;
+            border-right: 3px solid white;
+            border-bottom: 3px solid white;
+            transform: translate(-2px, -2px);
+        }
+
+        .resize-handle:hover,
+        .resize-handle:active {
+            background: #00E5FF;
+            box-shadow: 0 0 25px #00E5FF;
+        }
+
+        .resize-handle:focus-visible {
+            outline: 2px solid #DFFF00;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 1rem;
+            }
+
+            .resize-window {
+                min-width: 280px;
+                padding: 1rem;
+            }
+
+            .heading h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            body {
+                padding: .5rem;
+            }
+
+            .resize-window {
+                min-width: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before {
+                animation: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+
+        @view-transition {
+            navigation: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="resize-window" id="resizeWindow">
+
+        <div class="heading">
+            <span>WEB DESIGN / TEMPLATE COLLECTION</span>
+
+            <h1>Responsive Template Gallery</h1>
+
+            <p>
+                Choose a website template and explore how its layout
+                adapts to different screen sizes.
+            </p>
+        </div>
+
+        <div class="buttons">
+
+            <button class="active" data-type="portfolio" type="button">
+                Portfolio
+            </button>
+
+            <button data-type="business" type="button">
+                Business
+            </button>
+
+            <button data-type="blog" type="button">
+                Blog
+            </button>
+
+        </div>
+
+        <div class="preview-window">
+
+            <iframe class="preview" id="preview" title="Responsive website template preview"
+                referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen">
+            </iframe>
+
+        </div>
+
+        <div class="preview-footer">
+
+            <p id="templateDescription">
+                Mara - Designer and Illustrator Portfolio
+            </p>
+
+            <a id="openTemplate" href="https://zumatools.com/templates/designer-portfolio/" target="_blank"
+                rel="noopener noreferrer">
+                OPEN FULL WEBSITE ↗
+            </a>
+
+        </div>
+
+        <div class="resize-handle" id="resizeHandle" role="slider" aria-label="Resize template preview"
+            aria-orientation="diagonal" aria-valuemin="280" aria-valuenow="1000" tabindex="0">
+
+            <span></span>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /* =========================================
+           EXTERNAL WEBSITE TEMPLATES
+        ========================================= */
+
+        const templates = {
+
+            portfolio: {
+                url: "https://zumatools.com/templates/designer-portfolio/",
+                description: "Mara - Designer and Illustrator Portfolio"
+            },
+
+            business: {
+                url: "https://zumatools.com/templates/business/",
+                description: "Meridian - Corporate and Consulting Website"
+            },
+
+            blog: {
+                url: "https://zumatools.com/templates/personal-blog/",
+                description: "Iris - Personal Blog"
+            }
+
+        };
+
+
+        /* =========================================
+           TEMPLATE PREVIEW
+        ========================================= */
+
+        const preview = document.getElementById("preview");
+
+        const description = document.getElementById("templateDescription");
+
+        const openTemplate = document.getElementById("openTemplate");
+
+
+        function render(type) {
+
+            const selectedTemplate = templates[type];
+
+            if (!selectedTemplate) {
+                console.error("Template not found:", type);
+                return;
+            }
+
+            preview.src = selectedTemplate.url;
+
+            description.textContent = selectedTemplate.description;
+
+            openTemplate.href = selectedTemplate.url;
+
+            document.querySelectorAll("[data-type]").forEach(button => {
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.type === type
+                );
+
+            });
+
+        }
+
+
+        /* =========================================
+           TEMPLATE BUTTON EVENTS
+        ========================================= */
+
+        document.querySelectorAll("[data-type]").forEach(button => {
+
+            button.addEventListener("click", function () {
+
+                render(button.dataset.type);
+
+            });
+
+        });
+
+
+        /* LOAD DEFAULT TEMPLATE */
+
+        render("portfolio");
+
+
+        /* =========================================
+           RESIZABLE WINDOW
+        ========================================= */
+
+        const container = document.getElementById("resizeWindow");
+
+        const handle = document.getElementById("resizeHandle");
+
+        let startX = 0;
+        let startY = 0;
+        let startWidth = 0;
+        let startHeight = 0;
+        let resizing = false;
+
+
+        function updateResizeValue() {
+
+            handle.setAttribute(
+                "aria-valuenow",
+                container.offsetWidth
+            );
+
+        }
+
+
+        /* POINTER DOWN */
+
+        handle.addEventListener("pointerdown", function (e) {
+
+            if (e.pointerType === "mouse" && e.button !== 0) {
+                return;
+            }
+
+            e.preventDefault();
+
+            resizing = true;
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            startWidth = container.offsetWidth;
+            startHeight = container.offsetHeight;
+
+            handle.setPointerCapture(e.pointerId);
+
+        });
+
+
+        /* POINTER MOVE */
+
+        handle.addEventListener("pointermove", function (e) {
+
+            if (!resizing || !handle.hasPointerCapture(e.pointerId)) {
+                return;
+            }
+
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+
+            const parentWidth = container.parentElement.clientWidth;
+
+            const maxWidth = Math.max(
+                0,
+                Math.min(1000, parentWidth)
+            );
+
+            const maxHeight = Math.max(
+                380,
+                window.innerHeight * 0.9
+            );
+
+            const newWidth = Math.min(
+                maxWidth,
+                Math.max(
+                    Math.min(280, maxWidth),
+                    startWidth + deltaX
+                )
+            );
+
+            const newHeight = Math.min(
+                maxHeight,
+                Math.max(380, startHeight + deltaY)
+            );
+
+            container.style.width = newWidth + "px";
+
+            container.style.height = newHeight + "px";
+
+            updateResizeValue();
+
+        });
+
+
+        /* STOP RESIZING */
+
+        function stopResizing(e) {
+
+            resizing = false;
+
+            if (handle.hasPointerCapture(e.pointerId)) {
+                handle.releasePointerCapture(e.pointerId);
+            }
+
+        }
+
+
+        handle.addEventListener("pointerup", stopResizing);
+
+        handle.addEventListener("pointercancel", stopResizing);
+
+        handle.addEventListener("lostpointercapture", function () {
+
+            resizing = false;
+
+        });
+
+
+        /* =========================================
+           KEYBOARD RESIZING
+        ========================================= */
+
+        handle.addEventListener("keydown", function (e) {
+
+            const step = e.shiftKey ? 50 : 10;
+
+            let newWidth = container.offsetWidth;
+
+            let newHeight = container.offsetHeight;
+
+
+            if (e.key === "ArrowRight") {
+
+                newWidth += step;
+
+            } else if (e.key === "ArrowLeft") {
+
+                newWidth -= step;
+
+            } else if (e.key === "ArrowDown") {
+
+                newHeight += step;
+
+            } else if (e.key === "ArrowUp") {
+
+                newHeight -= step;
+
+            } else {
+
+                return;
+
+            }
+
+
+            const maxWidth = Math.min(
+                1000,
+                container.parentElement.clientWidth
+            );
+
+            const maxHeight = Math.max(
+                380,
+                window.innerHeight * 0.9
+            );
+
+
+            container.style.width = Math.min(
+                maxWidth,
+                Math.max(Math.min(280, maxWidth), newWidth)
+            ) + "px";
+
+
+            container.style.height = Math.min(
+                maxHeight,
+                Math.max(380, newHeight)
+            ) + "px";
+
+
+            updateResizeValue();
+
+            e.preventDefault();
+
+        });
+
+
+        /* INITIAL RESIZE VALUE */
+
+        updateResizeValue();
+
+
+    </script>
+
+</body>
+
+</html>

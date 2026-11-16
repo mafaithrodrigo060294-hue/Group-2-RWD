@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="A fluid grid uses flexible columns and gaps so content can rearrange instead of forcing a fixed-width layout.">
+  <title>Grid View | RWD GROUP 2</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="site.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">RWD<span style="color:var(--cyan)">CSS</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">☰ Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="viewport.html">Viewport</a><a href="gridview.html">Grid View</a>
+        <a href="mediaqueries.html">Media Queries</a><a href="images.html">Responsive Images</a>
+        <a href="videos.html">Responsive Videos</a><a href="frameworks.html">Frameworks</a>
+        <a href="templates.html">Templates</a>
+        <div class="dropdown">
+          <button class="drop-button" type="button" aria-expanded="false">More ▾</button>
+          <div class="dropdown-menu">
+            <a href="references.html">References</a><a href="activity.html">Activity</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">Lesson // Flexible grid</div>
+      <h1>Grid View</h1>
+      <p class="lead">A fluid grid uses flexible columns and gaps so content can rearrange instead of forcing a
+        fixed-width layout.</p>
+    </section>
+    <section class="content-panel">
+      <h2>What is a grid view?</h2>
+      <p>A grid view arranges content in rows and columns. A responsive grid uses flexible tracks that grow, shrink, or
+        wrap according to the available space.</p>
+      <h3>Useful CSS properties</h3>
+      <table>
+        <tr>
+          <th>Property</th>
+          <th>Purpose</th>
+        </tr>
+        <tr>
+          <td>display: grid</td>
+          <td>Turns an element into a grid container.</td>
+        </tr>
+        <tr>
+          <td>grid-template-columns</td>
+          <td>Defines the number and size of columns.</td>
+        </tr>
+        <tr>
+          <td>gap</td>
+          <td>Sets spacing between rows and columns.</td>
+        </tr>
+        <tr>
+          <td>grid-column</td>
+          <td>Controls how many columns an item spans.</td>
+        </tr>
+        <tr>
+          <td>box-sizing</td>
+          <td>Makes sizing calculations easier to manage.</td>
+        </tr>
+      </table>
+      <h3>Flexible grid syntax</h3>
+      <figure class="code-card">
+        <figcaption>CSS // fluid responsive grid</figcaption>
+        <pre><code><span class="selector">* </span>{ <span class="property">box-sizing</span>: border-box; }
+<span class="selector">.grid-container</span> {
+  <span class="property">display</span>: grid;
+  <span class="property">grid-template-columns</span>: repeat(auto-fit, minmax(180px, 1fr));
+  <span class="property">gap</span>: 1rem;
+}
+<span class="selector">.wide-item</span> { <span class="property">grid-column</span>: span 2; }</code></pre>
+      </figure>
+      <p><code>minmax(180px, 1fr)</code> gives each column a minimum size of 180px and lets it expand to share available
+        space. <code>auto-fit</code> fits as many columns as can comfortably fit.</p>
+      <div class="callout">Use CSS Grid for two-dimensional layouts. Flexbox is often more convenient for a single row
+        or column of items.</div>
+    </section>
+    <section class="content-panel">
+      <div class="eyebrow">Hands-on lab</div>
+      <h2>Interactive code playground</h2>
+      <p>Edit the starter code, run it, and compare your output. Use the solution tab when you want to check your work.
+      </p><iframe class="playground-frame" src="playground/playground.html?lesson=grid"
+        title="Grid View code playground" loading="lazy"></iframe>
+    </section>
+    <section class="card-actions"><a class="button" href="grid-example.html">Try the interactive demo</a><a
+        class="button" href="index.html#lessons">Back to lessons</a></section>
+  </main>
+  <footer class="site-footer"><strong>RESPONSIVE WEB DESIGN // GROUP 2</strong><br>One web. Every screen. Built to
+    adapt.
+  </footer>
+  <script src="page-transition.js"></script>
+
+</body>
+
+</html>

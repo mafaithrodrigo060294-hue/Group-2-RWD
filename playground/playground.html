@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Code Playground</title>
+
+    <link rel="stylesheet" href="playground.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+</head>
+
+<body>
+
+    <div class="topline">
+        <h1 id="lesson-title">RWD CODE LAB</h1>
+
+        <div class="actions">
+            <button class="primary" id="run">▶ Run code</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="workspace">
+
+        <section class="panel">
+            <div class="panel-head">
+                <span>EDITOR // HTML + CSS</span>
+
+                <div class="tabs">
+                    <button class="tab active" data-tab="html">HTML</button>
+                    <button class="tab" data-tab="css">CSS</button>
+                </div>
+            </div>
+
+            <div class="editor-wrap">
+                <textarea id="editor"></textarea>
+            </div>
+
+            <div class="status" id="status" aria-live="polite">
+                Edit the code, then run it to update the preview.
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-head">
+                <span>LIVE OUTPUT</span>
+                <span>ISOLATED PREVIEW</span>
+            </div>
+
+            <div class="preview-wrap">
+                <iframe id="preview" title="Code output preview" sandbox="allow-scripts"></iframe>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="playground.js"></script>
+
+</body>
+
+</html>

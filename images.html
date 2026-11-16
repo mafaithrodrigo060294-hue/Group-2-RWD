@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Responsive images scale within their containers. The picture and srcset tools can also select a suitable image source.">
+  <title>Responsive Images | RWD GROUP 2</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="site.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">RWD<span style="color:var(--cyan)">CSS</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">☰ Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="viewport.html">Viewport</a><a href="gridview.html">Grid View</a>
+        <a href="mediaqueries.html">Media Queries</a><a href="images.html">Responsive Images</a>
+        <a href="videos.html">Responsive Videos</a><a href="frameworks.html">Frameworks</a>
+        <a href="templates.html">Templates</a>
+        <div class="dropdown">
+          <button class="drop-button" type="button" aria-expanded="false">More ▾</button>
+          <div class="dropdown-menu">
+            <a href="references.html">References</a><a href="activity.html">Activity</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">Lesson // Image fitting</div>
+      <h1>Responsive Images</h1>
+      <p class="lead">Responsive images scale within their containers. The picture and srcset tools can also select a
+        suitable image source.</p>
+    </section>
+    <section class="content-panel">
+      <h2>Making images responsive</h2>
+      <p>Images should shrink with their containers while keeping their natural proportions.</p>
+      <figure class="code-card">
+        <figcaption>CSS // responsive image</figcaption>
+        <pre><code><span class="selector">img</span> {
+  <span class="property">max-width</span>: 100%;
+  <span class="property">height</span>: auto;
+  <span class="property">display</span>: block;
+}</code></pre>
+      </figure>
+      <h3>Image sizing properties</h3>
+      <ul>
+        <li><strong>width: 100%</strong> — fills the available container width.</li>
+        <li><strong>max-width: 100%</strong> — prevents the image from growing beyond its container.</li>
+        <li><strong>height: auto</strong> — preserves the image's natural aspect ratio.</li>
+        <li><strong>object-fit: cover</strong> — fills a fixed frame and crops excess content.</li>
+        <li><strong>object-fit: contain</strong> — shows the entire image, possibly leaving empty space.</li>
+      </ul>
+      <h3>Different image sources</h3>
+      <figure class="code-card">
+        <figcaption>HTML // picture element</figcaption>
+        <pre><code><span class="tag">&lt;picture&gt;</span>
+  <span class="tag">&lt;source</span> <span class="attr">media</span>=<span class="value">"(max-width: 600px)"</span> <span class="attr">srcset</span>=<span class="value">"small.jpg"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="value">"large.jpg"</span> <span class="attr">alt</span>=<span class="value">"Description"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/picture&gt;</span></code></pre>
+      </figure>
+      <p><code>srcset</code> and <code>sizes</code> let the browser choose an appropriate image file for the display
+        size and pixel density. For background images, <code>background-size: cover</code> fills the area, while
+        <code>contain</code> shows the whole image.
+      </p>
+    </section>
+    <section class="content-panel">
+      <div class="eyebrow">Hands-on lab</div>
+      <h2>Interactive code playground</h2>
+      <p>Edit the starter code, run it, and compare your output. Use the solution tab when you want to check your work.
+      </p><iframe class="playground-frame" src="playground/playground.html?lesson=images"
+        title="Responsive Images code playground" loading="lazy"></iframe>
+    </section>
+    <section class="card-actions"><a class="button" href="image-example.html">Try the interactive demo</a><a
+        class="button" href="index.html#lessons">Back to lessons</a></section>
+  </main>
+  <footer class="site-footer"><strong>RESPONSIVE WEB DESIGN // GROUP 2</strong><br>One web. Every screen. Built to
+    adapt.
+  </footer>
+  <script src="page-transition.js"></script>
+</body>
+
+</html>

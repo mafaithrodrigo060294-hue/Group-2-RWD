@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Frameworks provide reusable layout and component styles. Compare common options and a small responsive Bootstrap example.">
+  <title>CSS Frameworks | RWD GROUP 2</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="site.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">RWD<span style="color:var(--cyan)">CSS</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">☰ Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="viewport.html">Viewport</a><a href="gridview.html">Grid View</a>
+        <a href="mediaqueries.html">Media Queries</a><a href="images.html">Responsive Images</a>
+        <a href="videos.html">Responsive Videos</a><a href="frameworks.html">Frameworks</a>
+        <a href="templates.html">Templates</a>
+        <div class="dropdown">
+          <button class="drop-button" type="button" aria-expanded="false">More ▾</button>
+          <div class="dropdown-menu">
+            <a href="references.html">References</a><a href="activity.html">Activity</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">Lesson // Framework preview</div>
+      <h1>CSS Frameworks</h1>
+      <p class="lead">Frameworks provide reusable layout and component styles. Compare common options and a small
+        responsive Bootstrap example.</p>
+    </section>
+    <section class="content-panel">
+      <h2>What is a CSS framework?</h2>
+      <p>A CSS framework is a collection of ready-made styles, layout systems, and reusable components. It can speed up
+        development and help keep a design consistent.</p>
+      <table>
+        <tr>
+          <th>Framework</th>
+          <th>Overview</th>
+          <th>Common use</th>
+        </tr>
+        <tr>
+          <td>Bootstrap</td>
+          <td>Component-rich framework with a responsive grid.</td>
+          <td>Fast layouts, forms, navbars, cards.</td>
+        </tr>
+        <tr>
+          <td>Tailwind CSS</td>
+          <td>Utility-first classes applied directly in markup.</td>
+          <td>Custom designs with small styling utilities.</td>
+        </tr>
+        <tr>
+          <td>Bulma</td>
+          <td>Flexbox-based CSS framework.</td>
+          <td>Readable classes and responsive columns.</td>
+        </tr>
+        <tr>
+          <td>Foundation</td>
+          <td>Responsive front-end framework.</td>
+          <td>Flexible, customizable interfaces.</td>
+        </tr>
+      </table>
+      <h3>Bootstrap grid keywords</h3>
+      <table>
+        <tr>
+          <th>Class</th>
+          <th>Purpose</th>
+        </tr>
+        <tr>
+          <td>.container</td>
+          <td>Responsive fixed-width container.</td>
+        </tr>
+        <tr>
+          <td>.container-fluid</td>
+          <td>Full-width container.</td>
+        </tr>
+        <tr>
+          <td>.row</td>
+          <td>Horizontal group of columns.</td>
+        </tr>
+        <tr>
+          <td>.col</td>
+          <td>Automatically sized column.</td>
+        </tr>
+        <tr>
+          <td>.col-md-6</td>
+          <td>Half-width from the medium breakpoint upward.</td>
+        </tr>
+        <tr>
+          <td>.g-3</td>
+          <td>Gutter spacing utility.</td>
+        </tr>
+      </table>
+      <div class="callout"><strong>Advantages:</strong> faster setup, consistent components, and built-in responsive
+        patterns. <strong>Trade-offs:</strong> extra CSS, framework-specific conventions, and possible visual sameness
+        if defaults are not customized.</div>
+    </section>
+    <section class="content-panel">
+      <div class="eyebrow">Hands-on lab</div>
+      <h2>Interactive code playground</h2>
+      <p>Edit the starter code, run it, and compare your output. Use the solution tab when you want to check your work.
+      </p><iframe class="playground-frame" src="playground/playground.html?lesson=frameworks"
+        title="CSS Frameworks code playground" loading="lazy"></iframe>
+    </section>
+    <section class="card-actions"><a class="button" href="framework-example.html">Try the interactive demo</a><a
+        class="button" href="index.html#lessons">Back to lessons</a></section>
+  </main>
+  <footer class="site-footer"><strong>RESPONSIVE WEB DESIGN // GROUP 2</strong><br>One web. Every screen. Built to
+    adapt.
+  </footer>
+  <script src="page-transition.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Bootstrap Framework Lab</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 2rem;
+            font: 16px Arial, sans-serif;
+            color: #E8F1FF;
+            background: #080B14;
+            overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        /* ANIMATED CYBERPUNK BACKGROUND */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -50%;
+            z-index: -2;
+            pointer-events: none;
+
+            background:
+                radial-gradient(circle at 20% 30%, #00E5FF30, transparent 25%),
+                radial-gradient(circle at 80% 20%, #FF149328, transparent 25%),
+                radial-gradient(circle at 60% 80%, #DFFF0020, transparent 25%);
+
+            animation: backgroundMove 14s ease-in-out infinite alternate;
+        }
+
+        /* NEON GRID */
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(#00E5FF12 1px, transparent 1px),
+                linear-gradient(90deg, #00E5FF12 1px, transparent 1px);
+
+            background-size: 45px 45px;
+
+            mask-image: linear-gradient(to bottom,
+                    black,
+                    transparent 95%);
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                transform: translate(-3%, -2%) rotate(0deg) scale(1);
+            }
+
+            100% {
+                transform: translate(3%, 2%) rotate(8deg) scale(1.1);
+            }
+        }
+
+        /* RESIZABLE PREVIEW WINDOW */
+
+        .resize-window {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            height: 680px;
+            min-width: 280px;
+            min-height: 350px;
+
+            margin: auto;
+            padding: 1.3rem;
+
+            border: 1px solid #00E5FF88;
+            border-radius: 18px;
+
+            background: linear-gradient(145deg,
+                    #151B2BEE,
+                    #101625F2);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 0 25px #00E5FF25,
+                0 0 60px #FF149315,
+                inset 0 1px 1px #ffffff20;
+
+            overflow: hidden;
+        }
+
+        .preview {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 10px;
+            background: #080B14;
+        }
+
+        /* RESIZE HANDLE */
+
+        .resize-handle {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #FF1493;
+            border-radius: 12px 0 17px 0;
+
+            box-shadow: 0 0 15px #FF149388;
+
+            cursor: nwse-resize;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            z-index: 10;
+        }
+
+        .resize-handle span {
+            width: 13px;
+            height: 13px;
+
+            border-right: 3px solid white;
+            border-bottom: 3px solid white;
+
+            transform: translate(-2px, -2px);
+        }
+
+        .resize-handle:hover,
+        .resize-handle:active {
+            background: #00E5FF;
+            box-shadow: 0 0 25px #00E5FF;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 1rem;
+            }
+
+            .resize-window {
+                min-width: 280px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before {
+                animation: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="resize-window" id="resizeWindow">
+
+        <iframe class="preview" id="preview" title="Bootstrap responsive website preview" sandbox="allow-scripts"
+            srcdoc="<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Bootstrap Framework Demo</title>
+
+<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet'>
+
+<style>
+    body {
+        margin: 0;
+        background: #080B14;
+        color: #E8F1FF;
+        font-family: Arial, sans-serif;
+    }
+
+    .demo {
+        max-width: 960px;
+        margin: auto;
+        padding: 1.5rem;
+    }
+
+    .navbar {
+        background: linear-gradient(145deg,#151B2B,#101625);
+        border: 1px solid #00E5FF55;
+        border-radius: 12px;
+    }
+
+    .navbar-brand {
+        color: #00E5FF !important;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .nav-link {
+        color: #AAB6CA !important;
+    }
+
+    .nav-link:hover {
+        color: #DFFF00 !important;
+    }
+
+    .hero {
+        padding: 2rem 0;
+    }
+
+    .tag {
+        display: inline-block;
+        padding: 6px 12px;
+        border: 1px solid #DFFF00;
+        border-radius: 20px;
+        color: #DFFF00;
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    h1 {
+        color: #00E5FF;
+        text-shadow: 0 0 12px #00E5FF66;
+        font-weight: bold;
+    }
+
+    .hero p {
+        color: #AAB6CA;
+        line-height: 1.8;
+    }
+
+    .section-title {
+        color: #FF1493;
+        font-weight: bold;
+    }
+
+    .card {
+        height: 100%;
+        color: #E8F1FF;
+        background: linear-gradient(145deg,#151B2B,#101D30);
+        border: 1px solid #00E5FF66;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px #0005;
+        transition: .3s;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        border-color: #DFFF00;
+        box-shadow: 0 0 20px #DFFF0033;
+    }
+
+    .card-title {
+        color: #00E5FF;
+    }
+
+    .card-text {
+        color: #AAB6CA;
+    }
+
+    .card:nth-child(2) {
+        border-color: #FF149388;
+    }
+
+    .alert {
+        background: #00E5FF12;
+        color: #AAB6CA;
+        border: 1px solid #00E5FF66;
+    }
+
+    .badge {
+        font-size: .8rem;
+    }
+
+    .btn-demo {
+        background: #FF1493;
+        color: white;
+        border: 0;
+    }
+
+    .btn-demo:hover {
+        background: #00E5FF;
+        color: #080B14;
+    }
+
+    .footer {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid #00E5FF44;
+        color: #77869F;
+        text-align: center;
+        font-size: .75rem;
+    }
+</style>
+</head>
+
+<body>
+
+<main class='demo'>
+
+    <!-- NAVIGATION -->
+
+    <nav class='navbar navbar-expand-sm navbar-dark px-3'>
+        <a class='navbar-brand' href='#'>NEXUS.</a>
+
+        <div class='navbar-nav ms-auto flex-row flex-wrap gap-2'>
+            <a class='nav-link' href='#'>Home</a>
+            <a class='nav-link' href='#'>About</a>
+            <a class='nav-link' href='#'>Services</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+
+    <section class='hero'>
+        <span class='tag'>RESPONSIVE SYSTEM / 005</span>
+
+        <h1 class='display-5 mt-3'>Bootstrap Framework Lab</h1>
+
+        <p>
+            Bootstrap is a popular front-end framework that provides
+            ready-made CSS classes and components. It helps developers
+            create responsive websites without writing every layout
+            and component style from scratch.
+        </p>
+    </section>
+
+    <!-- ALERT -->
+
+    <div class='alert' role='alert'>
+        <strong>FRAMEWORK NOTICE:</strong>
+        This layout uses Bootstrap's grid system and responsive utility classes.
+    </div>
+
+    <!-- CARDS -->
+
+    <h2 class='section-title h4 mt-4 mb-3'>
+        Responsive Grid Components
+    </h2>
+
+    <div class='row g-3'>
+
+        <div class='col-12 col-md-6 col-lg-4'>
+            <div class='card'>
+                <div class='card-body'>
+                    <span class='badge text-bg-info mb-2'>MOBILE</span>
+                    <h5 class='card-title'>Small Screens</h5>
+                    <p class='card-text'>
+                        One column on narrow screens using
+                        <code>col-12</code>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class='col-12 col-md-6 col-lg-4'>
+            <div class='card'>
+                <div class='card-body'>
+                    <span class='badge text-bg-danger mb-2'>TABLET</span>
+                    <h5 class='card-title'>Medium Screens</h5>
+                    <p class='card-text'>
+                        Two columns at the medium breakpoint using
+                        <code>col-md-6</code>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class='col-12 col-md-6 col-lg-4'>
+            <div class='card'>
+                <div class='card-body'>
+                    <span class='badge text-bg-success mb-2'>DESKTOP</span>
+                    <h5 class='card-title'>Large Screens</h5>
+                    <p class='card-text'>
+                        Three columns on wider screens using
+                        <code>col-lg-4</code>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- EXTRA COMPONENT -->
+
+    <section class='mt-4'>
+        <h2 class='section-title h4'>Ready-Made Components</h2>
+
+        <p class='text-secondary'>
+            Bootstrap also provides buttons, alerts, badges,
+            navigation bars, cards, and many other reusable components.
+        </p>
+
+        <button class='btn btn-demo'>
+            Explore Components
+        </button>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class='footer'>
+        NEXUS. / BOOTSTRAP FRAMEWORK DEMONSTRATION
+    </footer>
+
+</main>
+
+</body>
+</html>">
+        </iframe>
+
+        <div class="resize-handle" id="resizeHandle" role="slider" aria-label="Resize Bootstrap preview"
+            aria-orientation="diagonal" tabindex="0">
+            <span></span>
+        </div>
+
+    </main>
+
+    <script>
+        /* MOUSE AND TOUCH RESIZING */
+
+        const container = document.getElementById("resizeWindow");
+        const handle = document.getElementById("resizeHandle");
+
+        let startX = 0;
+        let startY = 0;
+        let startWidth = 0;
+        let startHeight = 0;
+
+        handle.addEventListener("pointerdown", function (e) {
+
+            if (e.button !== 0) return;
+
+            e.preventDefault();
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            startWidth = container.offsetWidth;
+            startHeight = container.offsetHeight;
+
+            handle.setPointerCapture(e.pointerId);
+        });
+
+        handle.addEventListener("pointermove", function (e) {
+
+            if (!handle.hasPointerCapture(e.pointerId)) return;
+
+            const newWidth = startWidth + (e.clientX - startX);
+            const newHeight = startHeight + (e.clientY - startY);
+
+            const parentWidth = container.parentElement.clientWidth;
+
+            const maxWidth = Math.min(1000, parentWidth);
+            const maxHeight = window.innerHeight * 0.9;
+
+            container.style.width =
+                Math.min(maxWidth, Math.max(280, newWidth)) + "px";
+
+            container.style.height =
+                Math.min(maxHeight, Math.max(350, newHeight)) + "px";
+        });
+
+        function stopResizing(e) {
+            if (handle.hasPointerCapture(e.pointerId)) {
+                handle.releasePointerCapture(e.pointerId);
+            }
+        }
+
+        handle.addEventListener("pointerup", stopResizing);
+        handle.addEventListener("pointercancel", stopResizing);
+    </script>
+
+</body>
+
+</html>

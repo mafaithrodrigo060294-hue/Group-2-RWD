@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Responsive video keeps its aspect ratio and fits the available width without overflowing its container.">
+  <title>Responsive Videos | RWD GROUP 2</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="site.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">RWD<span style="color:var(--cyan)">CSS</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">☰ Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="viewport.html">Viewport</a><a href="gridview.html">Grid View</a>
+        <a href="mediaqueries.html">Media Queries</a><a href="images.html">Responsive Images</a>
+        <a href="videos.html">Responsive Videos</a><a href="frameworks.html">Frameworks</a>
+        <a href="templates.html">Templates</a>
+        <div class="dropdown">
+          <button class="drop-button" type="button" aria-expanded="false">More ▾</button>
+          <div class="dropdown-menu">
+            <a href="references.html">References</a><a href="activity.html">Activity</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">Lesson // Video controls</div>
+      <h1>Responsive Videos</h1>
+      <p class="lead">Responsive video keeps its aspect ratio and fits the available width without overflowing its
+        container.</p>
+    </section>
+    <section class="content-panel">
+      <h2>Making videos responsive</h2>
+      <p>Video should scale with the page and preserve its aspect ratio. The simplest approach is to give the video a
+        maximum width of 100% and an automatic height.</p>
+      <figure class="code-card">
+        <figcaption>CSS // responsive video element</figcaption>
+        <pre><code><span class="selector">video</span> {
+  <span class="property">width</span>: 100%;
+  <span class="property">height</span>: auto;
+  <span class="property">display</span>: block;
+}</code></pre>
+      </figure>
+      <h3>Responsive embedded video</h3>
+      <p>For an iframe such as a video embed, use a wrapper with an aspect ratio. The iframe fills the wrapper.</p>
+      <figure class="code-card">
+        <figcaption>HTML + CSS // 16:9 embed</figcaption>
+        <pre><code><span class="selector">.video-frame</span> { <span class="property">aspect-ratio</span>: 16 / 9; <span class="property">width</span>: 100%; }
+<span class="selector">.video-frame iframe</span> { <span class="property">width</span>: 100%; <span class="property">height</span>: 100%; <span class="property">border</span>: 0; }</code></pre>
+      </figure>
+      <p>Use the HTML <code>controls</code> attribute when users need playback controls. Use <code>muted</code> and
+        <code>loop</code> only when they make sense for the experience. Avoid autoplay with sound.
+      </p>
+    </section>
+    <section class="content-panel">
+      <div class="eyebrow">Hands-on lab</div>
+      <h2>Interactive code playground</h2>
+      <p>Edit the starter code, run it, and compare your output. Use the solution tab when you want to check your work.
+      </p><iframe class="playground-frame" src="playground/playground.html?lesson=videos"
+        title="Responsive Videos code playground" loading="lazy"></iframe>
+    </section>
+    <section class="card-actions"><a class="button" href="video-example.html">Try the interactive demo</a><a
+        class="button" href="index.html#lessons">Back to lessons</a></section>
+  </main>
+  <footer class="site-footer"><strong>RESPONSIVE WEB DESIGN // GROUP 2</strong><br>One web. Every screen. Built to
+    adapt.
+  </footer>
+  <script src="page-transition.js"></script>
+</body>
+
+</html>

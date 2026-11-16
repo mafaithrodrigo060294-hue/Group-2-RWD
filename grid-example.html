@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fluid Grid Demo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 2rem;
+            font: 16px Arial, sans-serif;
+            color: #E8F1FF;
+            background: #080B14;
+            overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        /* ANIMATED CYBERPUNK BACKGROUND */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -50%;
+            z-index: -2;
+            pointer-events: none;
+
+            background:
+                radial-gradient(circle at 20% 30%, #00E5FF30, transparent 25%),
+                radial-gradient(circle at 80% 20%, #FF149328, transparent 25%),
+                radial-gradient(circle at 60% 80%, #DFFF0020, transparent 25%);
+
+            animation: backgroundMove 14s ease-in-out infinite alternate;
+        }
+
+        /* NEON GRID BACKGROUND */
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(#00E5FF12 1px, transparent 1px),
+                linear-gradient(90deg, #00E5FF12 1px, transparent 1px);
+
+            background-size: 45px 45px;
+            mask-image: linear-gradient(to bottom, black, transparent 95%);
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                transform: translate(-3%, -2%) rotate(0deg) scale(1);
+            }
+
+            100% {
+                transform: translate(3%, 2%) rotate(8deg) scale(1.1);
+            }
+        }
+
+        /* MAIN CONTAINER */
+
+        .wrap {
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border: 1px solid #DFFF00;
+            border-radius: 20px;
+            color: #DFFF00;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #00E5FF;
+            text-shadow: 0 0 12px #00E5FF66;
+            font-size: 2rem;
+        }
+
+        p {
+            color: #AAB6CA;
+            line-height: 1.6;
+        }
+
+        /* RESIZABLE GRID CONTAINER */
+
+        .resize-container {
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            height: 420px;
+            min-width: 220px;
+            min-height: 220px;
+            margin: 25px auto;
+            padding: 18px 18px 28px;
+
+            container-type: inline-size;
+
+            border: 1px solid #00E5FF88;
+            border-radius: 18px;
+
+            background: linear-gradient(145deg, #151B2BEE, #101625F2);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 0 25px #00E5FF25,
+                0 0 60px #FF149315,
+                inset 0 1px 1px #ffffff20;
+
+            overflow: hidden;
+        }
+
+        /* FLUID CSS GRID */
+
+        .grid {
+            display: grid;
+            width: 100%;
+            height: 100%;
+
+            grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+            grid-auto-rows: minmax(85px, auto);
+
+            align-content: start;
+            gap: 12px;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* GRID TILES */
+
+        .tile {
+            min-width: 0;
+            min-height: 95px;
+            padding: 1rem;
+
+            border: 1px solid #00E5FF66;
+            border-radius: 14px;
+
+            background: linear-gradient(145deg, #00E5FF25, #244E9133);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            display: grid;
+            place-items: center;
+
+            color: #E8F1FF;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
+
+            box-shadow:
+                0 0 15px #00E5FF12,
+                inset 0 1px 1px #ffffff15;
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease,
+                border-color .3s ease;
+        }
+
+        .tile:hover {
+            transform: translateY(-4px);
+            border-color: #DFFF00;
+
+            box-shadow:
+                0 0 20px #DFFF0044,
+                0 0 35px #00E5FF22;
+        }
+
+        /* FEATURE CARD */
+
+        .wide {
+            grid-column: span 2;
+
+            background: linear-gradient(135deg, #FF149355, #6334A677);
+            border-color: #FF149388;
+
+            box-shadow:
+                0 0 20px #FF149320,
+                inset 0 1px 1px #ffffff20;
+        }
+
+        .wide:hover {
+            border-color: #FF1493;
+
+            box-shadow:
+                0 0 25px #FF149355,
+                0 0 40px #6334A633;
+        }
+
+        /* RESIZE CORNER HANDLE */
+
+        .resize-handle {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #FF1493;
+            border-radius: 12px 0 17px 0;
+
+            box-shadow: 0 0 15px #FF149388;
+
+            cursor: nwse-resize;
+            touch-action: none;
+            z-index: 5;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .resize-handle span {
+            width: 13px;
+            height: 13px;
+
+            border-right: 3px solid white;
+            border-bottom: 3px solid white;
+
+            transform: translate(-2px, -2px);
+        }
+
+        .resize-handle:hover,
+        .resize-handle:active {
+            background: #00E5FF;
+            box-shadow: 0 0 25px #00E5FF;
+        }
+
+        /* CONTAINER-BASED RESPONSIVENESS */
+
+        @container (max-width: 350px) {
+            .wide {
+                grid-column: span 1;
+            }
+        }
+
+        /* SYSTEM TIP */
+
+        .hint {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-left: 3px solid #FF1493;
+            background: #FF149315;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+            body {
+                padding: 1rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .resize-container {
+                min-width: 220px;
+            }
+
+            .tile {
+                min-height: 90px;
+                font-size: 13px;
+            }
+        }
+
+        /* ACCESSIBILITY */
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before {
+                animation: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <main class="wrap">
+
+        <span class="tag">RESPONSIVE SYSTEM / 002</span>
+
+        <h2>Fluid Grid System</h2>
+
+        <p>
+            Drag the bottom-right corner of the container to resize
+            the grid. The cards automatically rearrange.
+        </p>
+
+        <div class="resize-container" id="resizeContainer">
+
+            <div class="grid">
+                <div class="tile wide">FEATURE CARD</div>
+                <div class="tile">01 / HTML</div>
+                <div class="tile">02 / CSS</div>
+                <div class="tile">03 / GRID</div>
+                <div class="tile">04 / FLEX</div>
+                <div class="tile">05 / FLOW</div>
+            </div>
+
+            <div class="resize-handle" id="resizeHandle" aria-label="Drag to resize grid" role="slider"
+                aria-orientation="diagonal" tabindex="0">
+                <span></span>
+            </div>
+
+        </div>
+
+
+        <p class="hint">
+            Using the drag feature represents how a responsive grid system can adapt to different screen sizes. The
+            layout changes based on the container's width, demonstrating the principles of fluid design.
+        </p>
+
+    </main>
+    <script>
+
+        const container = document.getElementById("resizeContainer");
+        const handle = document.getElementById("resizeHandle");
+
+        let startX = 0;
+        let startY = 0;
+        let startWidth = 0;
+        let startHeight = 0;
+
+        handle.addEventListener("pointerdown", function (e) {
+            if (e.button !== 0) return;
+
+            e.preventDefault();
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            startWidth = container.offsetWidth;
+            startHeight = container.offsetHeight;
+
+            handle.setPointerCapture(e.pointerId);
+        });
+
+        handle.addEventListener("pointermove", function (e) {
+            if (!handle.hasPointerCapture(e.pointerId)) return;
+
+            const newWidth = startWidth + (e.clientX - startX);
+            const newHeight = startHeight + (e.clientY - startY);
+
+            const parentWidth = container.parentElement.clientWidth;
+
+            const maxWidth = Math.min(850, parentWidth);
+            const maxHeight = window.innerHeight * 0.8;
+
+            container.style.width =
+                Math.min(maxWidth, Math.max(220, newWidth)) + "px";
+
+            container.style.height =
+                Math.min(maxHeight, Math.max(220, newHeight)) + "px";
+        });
+
+        function stopResizing(e) {
+            if (handle.hasPointerCapture(e.pointerId)) {
+                handle.releasePointerCapture(e.pointerId);
+            }
+        }
+
+        handle.addEventListener("pointerup", stopResizing);
+        handle.addEventListener("pointercancel", stopResizing);
+
+    </script>
+
+</body>
+
+</html>

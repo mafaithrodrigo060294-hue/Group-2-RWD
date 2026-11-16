@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Responsive Video Studio</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 2rem;
+            font: 16px Arial, sans-serif;
+            color: #E8F1FF;
+            background: #080B14;
+            overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        /* ANIMATED CYBERPUNK BACKGROUND */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -50%;
+            z-index: -2;
+            pointer-events: none;
+
+            background:
+                radial-gradient(circle at 20% 30%, #00E5FF30, transparent 25%),
+                radial-gradient(circle at 80% 20%, #FF149328, transparent 25%),
+                radial-gradient(circle at 60% 80%, #DFFF0020, transparent 25%);
+
+            animation: backgroundMove 14s ease-in-out infinite alternate;
+        }
+
+        /* NEON GRID */
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(#00E5FF12 1px, transparent 1px),
+                linear-gradient(90deg, #00E5FF12 1px, transparent 1px);
+
+            background-size: 45px 45px;
+
+            mask-image: linear-gradient(to bottom,
+                    black,
+                    transparent 95%);
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                transform: translate(-3%, -2%) rotate(0deg) scale(1);
+            }
+
+            100% {
+                transform: translate(3%, 2%) rotate(8deg) scale(1.1);
+            }
+        }
+
+        /* RESIZABLE PREVIEW WINDOW */
+
+        .resize-window {
+            position: relative;
+            width: 100%;
+            max-width: 850px;
+            height: 650px;
+            min-width: 280px;
+            min-height: 350px;
+
+            margin: auto;
+            padding: 1.3rem;
+
+            border: 1px solid #00E5FF88;
+            border-radius: 18px;
+
+            background: linear-gradient(145deg,
+                    #151B2BEE,
+                    #101625F2);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 0 25px #00E5FF25,
+                0 0 60px #FF149315,
+                inset 0 1px 1px #ffffff20;
+
+            overflow: auto;
+        }
+
+        /* SAMPLE WEBSITE */
+
+        .sample-site {
+            width: 100%;
+            min-height: 100%;
+            padding-bottom: 1rem;
+        }
+
+        /* WEBSITE HEADER */
+
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #00E5FF44;
+        }
+
+        .logo {
+            color: #00E5FF;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px #00E5FF66;
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .site-nav a {
+            color: #AAB6CA;
+            text-decoration: none;
+            font-size: .85rem;
+            transition: color .3s;
+        }
+
+        .site-nav a:hover {
+            color: #DFFF00;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 1.5rem 0;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+
+            border: 1px solid #DFFF00;
+            border-radius: 20px;
+
+            color: #DFFF00;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            margin: 1rem 0;
+            color: #00E5FF;
+            font-size: 2rem;
+            text-shadow: 0 0 12px #00E5FF66;
+        }
+
+        p {
+            color: #AAB6CA;
+            line-height: 1.7;
+        }
+
+        /* VIDEO FRAME */
+
+        .frame {
+            width: 100%;
+            overflow: hidden;
+
+            border: 2px solid #00E5FF;
+            border-radius: 16px;
+
+            background: #000;
+
+            box-shadow:
+                0 0 20px #00E5FF22,
+                inset 0 0 15px #00E5FF15;
+
+            transition:
+                border-radius .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .frame video {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* VIDEO CONTROLS */
+
+        .controls-title {
+            margin-top: 1.5rem;
+            color: #FF1493;
+            font-size: 1.2rem;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: .8rem 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .control-option {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+
+            color: #AAB6CA;
+            font-size: .85rem;
+        }
+
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #00E5FF;
+            cursor: pointer;
+        }
+
+        .shape-control {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+
+            color: #DFFF00;
+            font-size: .85rem;
+        }
+
+        select {
+            padding: .6rem;
+
+            border: 1px solid #00E5FF66;
+            border-radius: 8px;
+
+            background: #101D30;
+            color: #E8F1FF;
+
+            outline: none;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: #DFFF00;
+            box-shadow: 0 0 12px #DFFF0033;
+        }
+
+        /* INFORMATION */
+
+        .info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+
+            border-left: 3px solid #FF1493;
+            border-radius: 0 10px 10px 0;
+
+            background: #FF149315;
+        }
+
+        .info h2 {
+            margin-top: 0;
+            color: #FF1493;
+            font-size: 1.1rem;
+        }
+
+        .info p {
+            margin-bottom: 0;
+            font-size: .9rem;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+
+            border-top: 1px solid #00E5FF44;
+
+            color: #77869F;
+            font-size: .75rem;
+            text-align: center;
+        }
+
+        /* RESPONSIVE MEDIA QUERIES */
+
+        @media (max-width: 600px) {
+
+            .site-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .site-nav {
+                flex-wrap: wrap;
+                gap: .7rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .site-nav {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .logo {
+                font-size: .95rem;
+            }
+
+            .control-option,
+            .shape-control {
+                font-size: .8rem;
+            }
+        }
+
+        /* ACCESSIBILITY */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            body::before {
+                animation: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="resize-window" id="resizeWindow">
+
+        <div class="sample-site">
+
+            <!-- HEADER -->
+
+            <header class="site-header">
+
+                <div class="logo">MOTION LAB.</div>
+
+                <nav class="site-nav">
+                    <a href="#">Home</a>
+                    <a href="#">Videos</a>
+                    <a href="#">Studio</a>
+                    <a href="#">Contact</a>
+                </nav>
+
+            </header>
+
+            <!-- HERO -->
+
+            <section class="hero">
+
+                <span class="tag">RESPONSIVE SYSTEM / 004</span>
+
+                <h1>Responsive Video Studio</h1>
+
+                <p>
+                    Videos should adapt to the available screen
+                    space without overflowing their containers.
+                    Responsive video design helps maintain proper
+                    proportions and provides a consistent viewing
+                    experience across different devices.
+                </p>
+
+            </section>
+
+            <!-- VIDEO PLAYER -->
+
+            <section>
+
+                <div class="frame" id="frame">
+
+                    <video id="clip" controls playsinline preload="metadata">
+
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                            type="video/mp4">
+
+                        Your browser does not support video.
+
+                    </video>
+
+                </div>
+
+            </section>
+
+            <!-- VIDEO SETTINGS -->
+
+            <h2 class="controls-title">Playback Settings</h2>
+
+            <p>
+                Customize the video player using the controls below.
+            </p>
+
+            <section class="controls">
+
+                <label class="control-option">
+                    <input id="controls" type="checkbox" checked>
+                    Show Controls
+                </label>
+
+                <label class="control-option">
+                    <input id="loop" type="checkbox">
+                    Loop Video
+                </label>
+
+                <label class="control-option">
+                    <input id="muted" type="checkbox">
+                    Mute Audio
+                </label>
+
+                <label class="shape-control">
+                    Frame Shape
+
+                    <select id="radius">
+                        <option value="16px">Rounded</option>
+                        <option value="0">Square</option>
+                        <option value="32px">Soft</option>
+                    </select>
+                </label>
+
+            </section>
+
+            <!-- INFORMATION -->
+
+            <section class="info">
+
+                <h2>Understanding Responsive Video</h2>
+
+                <p>
+                    The width property allows a video to scale
+                    according to its parent container, while
+                    height: auto preserves its original aspect
+                    ratio. The controls attribute enables built-in
+                    playback controls, and playsinline allows
+                    inline playback on supported mobile browsers.
+                </p>
+
+            </section>
+
+            <!-- FOOTER -->
+
+            <footer class="footer">
+                MOTION LAB. / RESPONSIVE VIDEO DEMONSTRATION
+            </footer>
+
+        </div>
+
+        <!-- RESIZE HANDLE -->
+
+        <div class="resize-handle" id="resizeHandle" role="slider" aria-label="Resize video studio preview"
+            aria-orientation="diagonal" tabindex="0">
+            <span></span>
+        </div>
+
+    </main>
+
+    <style>
+        /* TOUCH-FRIENDLY RESIZE HANDLE */
+
+        .resize-handle {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #FF1493;
+            border-radius: 12px 0 17px 0;
+
+            box-shadow: 0 0 15px #FF149388;
+
+            cursor: nwse-resize;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            z-index: 10;
+        }
+
+        .resize-handle span {
+            width: 13px;
+            height: 13px;
+
+            border-right: 3px solid white;
+            border-bottom: 3px solid white;
+
+            transform: translate(-2px, -2px);
+        }
+
+        .resize-handle:hover,
+        .resize-handle:active {
+            background: #00E5FF;
+            box-shadow: 0 0 25px #00E5FF;
+        }
+    </style>
+
+    <script>
+        /* VIDEO PLAYBACK SETTINGS */
+
+        const video = document.querySelector("#clip");
+        const frame = document.querySelector("#frame");
+
+        document.querySelector("#controls").addEventListener("change", function (e) {
+            video.controls = e.target.checked;
+        });
+
+        document.querySelector("#loop").addEventListener("change", function (e) {
+            video.loop = e.target.checked;
+        });
+
+        document.querySelector("#muted").addEventListener("change", function (e) {
+            video.muted = e.target.checked;
+        });
+
+        document.querySelector("#radius").addEventListener("change", function (e) {
+            frame.style.borderRadius = e.target.value;
+        });
+
+        /* MOUSE AND TOUCH RESIZING */
+
+        const container = document.getElementById("resizeWindow");
+        const handle = document.getElementById("resizeHandle");
+
+        let startX = 0;
+        let startY = 0;
+        let startWidth = 0;
+        let startHeight = 0;
+
+        handle.addEventListener("pointerdown", function (e) {
+
+            if (e.button !== 0) return;
+
+            e.preventDefault();
+
+            startX = e.clientX;
+            startY = e.clientY;
+
+            startWidth = container.offsetWidth;
+            startHeight = container.offsetHeight;
+
+            handle.setPointerCapture(e.pointerId);
+        });
+
+        handle.addEventListener("pointermove", function (e) {
+
+            if (!handle.hasPointerCapture(e.pointerId)) return;
+
+            const newWidth = startWidth + (e.clientX - startX);
+            const newHeight = startHeight + (e.clientY - startY);
+
+            const parentWidth = container.parentElement.clientWidth;
+
+            const maxWidth = Math.min(850, parentWidth);
+            const maxHeight = window.innerHeight * 0.8;
+
+            container.style.width =
+                Math.min(maxWidth, Math.max(280, newWidth)) + "px";
+
+            container.style.height =
+                Math.min(maxHeight, Math.max(350, newHeight)) + "px";
+        });
+
+        function stopResizing(e) {
+
+            if (handle.hasPointerCapture(e.pointerId)) {
+                handle.releasePointerCapture(e.pointerId);
+            }
+
+        }
+
+        handle.addEventListener("pointerup", stopResizing);
+        handle.addEventListener("pointercancel", stopResizing);
+
+    </script>
+
+</body>
+
+</html>

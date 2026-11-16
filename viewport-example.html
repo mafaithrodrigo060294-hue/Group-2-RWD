@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Responsive Website Viewport Demo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 2rem;
+            font: 16px Arial, sans-serif;
+            color: #E8F1FF;
+            background: #080B14;
+            overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        /* ANIMATED CYBERPUNK BACKGROUND */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -50%;
+            z-index: -2;
+            pointer-events: none;
+
+            background:
+                radial-gradient(circle at 20% 30%, #00E5FF30, transparent 25%),
+                radial-gradient(circle at 80% 20%, #FF149328, transparent 25%),
+                radial-gradient(circle at 60% 80%, #DFFF0020, transparent 25%);
+
+            animation: backgroundMove 14s ease-in-out infinite alternate;
+        }
+
+        /* NEON GRID */
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+
+            background-image:
+                linear-gradient(#00E5FF12 1px, transparent 1px),
+                linear-gradient(90deg, #00E5FF12 1px, transparent 1px);
+
+            background-size: 45px 45px;
+
+            mask-image: linear-gradient(to bottom,
+                    black,
+                    transparent 95%);
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                transform: translate(-3%, -2%) rotate(0deg) scale(1);
+            }
+
+            100% {
+                transform: translate(3%, 2%) rotate(8deg) scale(1.1);
+            }
+        }
+
+        /* RESIZABLE WEBSITE WINDOW */
+
+        .resize-window {
+            width: 100%;
+            max-width: 850px;
+            height: 560px;
+            min-width: 280px;
+            min-height: 300px;
+
+            margin: auto;
+            padding: 1.3rem;
+
+            resize: both;
+            overflow: auto;
+
+            border: 1px solid #00E5FF88;
+            border-radius: 18px;
+
+            background: linear-gradient(145deg,
+                    #151B2BEE,
+                    #101625F2);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 0 25px #00E5FF25,
+                0 0 60px #FF149315,
+                inset 0 1px 1px #ffffff20;
+
+            container-type: inline-size;
+        }
+
+        /* SAMPLE WEBSITE */
+
+        .sample-site {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        /* WEBSITE HEADER */
+
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #00E5FF44;
+        }
+
+        .logo {
+            color: #00E5FF;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px #00E5FF66;
+            white-space: nowrap;
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .site-nav a {
+            color: #AAB6CA;
+            text-decoration: none;
+            font-size: .85rem;
+            transition: color .3s;
+        }
+
+        .site-nav a:hover {
+            color: #DFFF00;
+        }
+
+        /* HERO SECTION */
+
+        .hero {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid #00E5FF22;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border: 1px solid #DFFF00;
+            border-radius: 20px;
+            color: #DFFF00;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            margin: 1rem 0;
+            color: #00E5FF;
+            font-size: 2.6rem;
+            line-height: 1.1;
+            text-shadow: 0 0 12px #00E5FF66;
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: #AAB6CA;
+            line-height: 1.8;
+        }
+
+        /* CONTENT SECTIONS */
+
+        .content {
+            padding: 1.5rem 0;
+        }
+
+        .content h2 {
+            color: #FF1493;
+            font-size: 1.4rem;
+            margin-bottom: .6rem;
+        }
+
+        .content p {
+            color: #AAB6CA;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .subsection {
+            padding: 1rem;
+            margin-top: 1rem;
+
+            border-left: 3px solid #00E5FF;
+            background: #00E5FF0D;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .subsection h3 {
+            color: #DFFF00;
+            margin-top: 0;
+        }
+
+        .subsection p {
+            margin-bottom: 0;
+        }
+
+        /* FOOTER */
+
+        .site-footer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #00E5FF44;
+
+            color: #77869F;
+            font-size: .8rem;
+            text-align: center;
+        }
+
+        /* CONTAINER-BASED RESPONSIVENESS */
+
+        @container (max-width: 600px) {
+
+            .site-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: .8rem;
+            }
+
+            .site-nav {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: .7rem 1rem;
+            }
+
+            .site-nav a {
+                font-size: .8rem;
+            }
+
+            .hero {
+                padding: 1.5rem 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p,
+            .content p {
+                font-size: .9rem;
+            }
+
+            .content h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @container (max-width: 380px) {
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .site-nav {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            .subsection {
+                padding: .8rem;
+            }
+
+            .site-footer {
+                font-size: .7rem;
+            }
+        }
+
+        /* MOBILE SCREEN */
+
+        @media (max-width: 500px) {
+            body {
+                padding: 1rem;
+            }
+
+            .resize-window {
+                min-width: 280px;
+            }
+        }
+
+        /* ACCESSIBILITY */
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before {
+                animation: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="resize-window">
+
+        <div class="sample-site">
+
+            <!-- WEBSITE HEADER -->
+
+            <header class="site-header">
+
+                <div class="logo">NEXUS.</div>
+
+                <nav class="site-nav">
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="#">Contact</a>
+                </nav>
+
+            </header>
+
+            <!-- HERO SECTION -->
+
+            <section class="hero">
+
+                <span class="tag">RESPONSIVE SYSTEM / 001</span>
+
+                <h1>Design Beyond Limits.</h1>
+
+                <p>
+                    A modern website should adapt to every screen,
+                    every device, and every available space.
+                    Responsive design makes content accessible
+                    without sacrificing readability or usability.
+                </p>
+
+            </section>
+
+            <!-- MAIN CONTENT -->
+
+            <section class="content">
+
+                <h2>Building for Every Viewport</h2>
+
+                <p>
+                    Websites are viewed on desktop computers,
+                    tablets, and mobile phones. Each device has
+                    a different available viewing area, which
+                    means a website must adjust its layout and
+                    typography to provide a comfortable experience.
+                </p>
+
+                <div class="subsection">
+
+                    <h3>Flexible Typography</h3>
+
+                    <p>
+                        Headings, paragraphs, and other text
+                        elements can change their size and spacing
+                        depending on the available container width.
+                        This helps keep information readable on
+                        both large and small screens.
+                    </p>
+
+                </div>
+
+                <div class="subsection">
+
+                    <h3>Adaptive Content</h3>
+
+                    <p>
+                        Navigation, spacing, and text alignment
+                        can also change as the viewing area becomes
+                        smaller. This allows the website to remain
+                        organized and easy to understand.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- FOOTER -->
+
+            <footer class="site-footer">
+                NEXUS. / RESPONSIVE WEB DESIGN DEMONSTRATION
+            </footer>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
